@@ -1,0 +1,150 @@
+<h1 class="mb-5">
+  <span nz-icon nzType="dingding" nzTheme="outline"></span> Update Student
+</h1>
+<form nz-form [formGroup]="studentForm" (ngSubmit)="handleSubmit()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Họ và Tên</nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzHasFeedback
+      nzValidatingTip="Validating..."
+    >
+      <input
+        nz-input
+        formControlName="nameStudent"
+        placeholder="Nhập Tên Học Sinh, Sinh Viên"
+      />
+      <div
+        class="text-danger"
+        *ngIf="studentForm.get('nameStudent')?.errors?.['required']"
+      >
+        Tên không được để trống
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="studentForm.get('nameStudent')?.errors?.['minlength']"
+      >
+        Tên phải nhiều hơn 5 ký tự
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Mã Số </nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzHasFeedback
+      nzValidatingTip="Validating..."
+    >
+      <input
+        nz-input
+        formControlName="mssv"
+        placeholder="Nhập Mã Số Học Sinh, Sinh Viên"
+      />
+      <div
+        class="text-danger"
+        *ngIf="studentForm.get('mssv')?.errors?.['required']"
+      >
+        MSHS/MSSV không được để trống
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Tuổi</nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzHasFeedback
+      nzValidatingTip="Validating..."
+    >
+      <input
+        nz-input
+        formControlName="age"
+        placeholder="Nhập Tuổi Học Sinh, Sinh Viên"
+      />
+      <div
+        class="text-danger"
+        *ngIf="studentForm.get('age')?.errors?.['required']"
+      >
+        Tuổi không được để trống
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Quê Quán</nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzHasFeedback
+      nzValidatingTip="Validating..."
+    >
+      <input
+        nz-input
+        formControlName="hometown"
+        placeholder="Nhập Quê Quán Học Sinh, Sinh Viên"
+      />
+      <div
+        class="text-danger"
+        *ngIf="studentForm.get('hometown')?.errors?.['required']"
+      >
+        Quê Quán không được để trống
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzFor="school_id" nzRequired>
+      Học Sinh, Sinh Viên Thuộc Trường
+    </nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzErrorTip="Please select a school!"
+      nzValidatingTip="Validating..."
+      nzHasFeedback
+    >
+      <nz-select name="select-error" formControlName="school_id">
+        <nz-option
+          *ngFor="let school of data"
+          [nzValue]="school?.id || null"
+          [nzLabel]="school?.nameSchool || ''"
+        ></nz-option>
+      </nz-select>
+      <div
+        class="text-danger"
+        *ngIf="studentForm.get('school_id')?.errors?.['required']"
+      >
+        Vui lòng chọn trường học
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzFor="class_id" nzRequired
+      >Học Sinh, Sinh Viên Thuộc Lớp</nz-form-label
+    >
+    <nz-form-control
+      [nzSpan]="12"
+      nzErrorTip="Please select a class!"
+      nzHasFeedback
+    >
+      <nz-select formControlName="class_id" nzPlaceHolder="Chọn lớp học">
+        <nz-option
+          *ngFor="let cls of filteredClasses"
+          [nzValue]="cls?.id || null"
+          [nzLabel]="cls?.nameClass || ''"
+        ></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+      <a href="/student" nz-button> Back </a>
+      <button nz-button nzType="primary">Submit</button>
+      <button nz-button (click)="resetForm($event)">Reset</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+{{ studentForm.value | json }}
+{{ data | json }}

@@ -1,0 +1,19 @@
+[nz-form] {
+  max-width: 80%;
+}
+
+button,
+a {
+  margin-left: 15px;
+}
+
+button[nz-button][nzType="primary"] {
+  background-color: darkcyan;
+  border-color: darkcyan;
+  color: white;
+}
+
+button[nz-button][nzType="primary"]:hover {
+  background-color: #333;
+  border-color: #333;
+}

@@ -1,0 +1,41 @@
+<h1 class="mb-5">Quản Lý Học Sinh | Sinh Viên</h1>
+<a routerLink="add" nz-button nzType="default" class="mb-2">
+  Add New Student
+</a>
+<nz-table #basicTable [nzScroll]="{ y: '330px' }" [nzData]="data">
+  <thead>
+    <tr>
+      <th nzWidth="10%">STT</th>
+      <th nzWidth="15%">Name</th>
+      <th nzWidth="15%">MSHS/MSSV</th>
+      <th nzWidth="15%">Class</th>
+      <th nzWidth="20%">School</th>
+      <th nzWidth="30%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of basicTable.data; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ student.nameStudent }}</td>
+      <td>{{ student.mssv }}</td>
+      <td>{{ student.class_data?.nameClass }}</td>
+      <td>{{ student.school_data?.nameSchool }}</td>
+      <td>
+        <a routerLink="detail/{{ student.id }}" nz-button nzType="default">
+          Detail
+        </a>
+        <a routerLink="update/{{ student.id }}" nz-button nzType="default">
+          Update
+        </a>
+        <button
+          (click)="onDelete(student.id)"
+          nz-button
+          nzType="default"
+          nzDanger
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

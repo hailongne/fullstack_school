@@ -1,0 +1,35 @@
+<h1 class="mb-5">Quản Lý Lớp Học</h1>
+<a routerLink="add" nz-button nzType="default" class="mb-2"> Add New Class </a>
+<nz-table #basicTable [nzScroll]="{ y: '330px' }" [nzData]="data">
+  <thead>
+    <tr>
+      <th nzWidth="10%">STT</th>
+      <th nzWidth="20%">Name</th>
+      <th nzWidth="20%">School</th>
+      <th nzWidth="20%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let class of basicTable.data; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ class.nameClass }}</td>
+      <td>{{ class.school_data?.nameSchool }}</td>
+      <td>
+        <a routerLink="detail/{{ class.id }}" nz-button nzType="default">
+          Detail
+        </a>
+        <a routerLink="update/{{ class.id }}" nz-button nzType="default">
+          Update
+        </a>
+        <button
+          (click)="onDelete(class.id)"
+          nz-button
+          nzType="default"
+          nzDanger
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

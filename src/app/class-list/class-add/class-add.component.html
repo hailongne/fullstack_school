@@ -1,0 +1,66 @@
+<h1 class="m-5">
+  <span nz-icon nzType="dingding" nzTheme="outline"></span> Add New Class
+</h1>
+<form nz-form [formGroup]="classForm" (ngSubmit)="handleSubmit()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Tên Lớp Học</nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzHasFeedback
+      nzValidatingTip="Validating..."
+    >
+      <input
+        nz-input
+        formControlName="nameClass"
+        placeholder="Nhập Tên Trường Học"
+      />
+      <div
+        class="text-danger"
+        *ngIf="classForm.get('nameClass')?.errors?.['required']"
+      >
+        Tên trường học không được để trống
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="classForm.get('nameClass')?.errors?.['minlength']"
+      >
+        Tên trường học phải nhiều hơn 5 ký tự
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzFor="school_id" nzRequired>
+      Lớp Học Thuộc Trường
+    </nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzErrorTip="Please select a school!"
+      nzValidatingTip="Validating..."
+      nzHasFeedback
+    >
+      <nz-select name="select-error" formControlName="school_id">
+        <nz-option
+          *ngFor="let class of data"
+          nzValue="{{ class.id }}"
+          nzLabel="{{ class.nameSchool }}"
+        ></nz-option>
+      </nz-select>
+
+      <div
+        class="text-danger"
+        *ngIf="classForm.get('school_id')?.errors?.['required']"
+      >
+        Vui lòng chọn trường học
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+      <a href="/class" nz-button> Back </a>
+      <button nz-button nzType="primary">Submit</button>
+      <button nz-button (click)="resetForm($event)">Reset</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

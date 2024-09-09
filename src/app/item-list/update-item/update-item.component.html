@@ -1,0 +1,90 @@
+<h1 class="m-5">
+  <span nz-icon nzType="dingding" nzTheme="outline"></span> Update School
+</h1>
+<form nz-form [formGroup]="schoolForm" (ngSubmit)="handleSubmit()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Tên Trường Học</nz-form-label>
+    <nz-form-control
+      [nzSpan]="12"
+      nzHasFeedback
+      nzValidatingTip="Validating..."
+    >
+      <input
+        nz-input
+        formControlName="nameSchool"
+        placeholder="Nhập Tên Trường Học"
+      />
+      <div
+        class="text-danger"
+        *ngIf="schoolForm.get('nameSchool')?.errors?.['required']"
+      >
+        nameSchool is required
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="schoolForm.get('nameSchool')?.errors?.['minlength']"
+      >
+        nameSchool must be at least 5 characters long.
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Địa chỉ</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input
+        nz-input
+        formControlName="locationSchool"
+        placeholder="Nhập địa chỉ của trường học"
+        type="text"
+      />
+      <div
+        class="text-danger"
+        *ngIf="schoolForm.get('locationSchool')?.errors?.['required']"
+      >
+        location school is required.
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Rating</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input
+        nz-input
+        formControlName="rating"
+        placeholder="Nhập điểm của trường học"
+        type="number"
+      />
+
+      <div
+        class="text-danger"
+        *ngIf="schoolForm.get('rating')?.errors?.['required']"
+      >
+        rating is required
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="schoolForm.get('rating')?.errors?.['min']"
+      >
+        rating must be greater than or equal to 0.
+      </div>
+      <div
+        class="text-danger"
+        *ngIf="schoolForm.get('rating')?.errors?.['max']"
+      >
+        Rating must be less than or equal to 10.
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+      <a href="/school" nz-button> Back </a>
+      <button nz-button nzType="primary" [disabled]="!schoolForm.valid">
+        Submit
+      </button>
+      <button nz-button (click)="resetForm($event)">Reset</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
