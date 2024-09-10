@@ -21,6 +21,8 @@ class ClassBySchool(models.Model):
 class Student(models.Model):
     id = models.AutoField(primary_key=True)
     nameStudent = models.CharField(max_length=255)
+    # asdasdqwewq
+    # test nha
     mssv = models.CharField(max_length=255)
     age = models.PositiveIntegerField()
     hometown = models.CharField(max_length=255)
